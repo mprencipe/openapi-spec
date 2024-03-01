@@ -67,7 +67,7 @@ type OpenAPI310Operation struct {
 }
 
 type OpenAPI310Response struct {
-	Description *string                         `json:"description"`
+	Description string                          `json:"description"`
 	Headers     *map[string]OpenAPI310Header    `json:"headers"`
 	Content     *map[string]OpenAPI310MediaType `json:"content"`
 	Links       *map[string]OpenAPI310Link      `json:"links"`
@@ -112,9 +112,9 @@ type OpenAPI310Components struct {
 }
 
 type OpenAPI310RequestBody struct {
-	Description string                         `json:"description"`
+	Description *string                        `json:"description"`
 	Content     map[string]OpenAPI310MediaType `json:"content"`
-	Required    bool                           `json:"required"`
+	Required    *bool                          `json:"required"`
 }
 
 type OpenAPI310MediaType struct {
@@ -203,14 +203,14 @@ type OpenAPI310ServerVariable struct {
 }
 
 type OpenAPI310Tag struct {
-	Name         string                          `json:"name"`
-	Description  string                          `json:"description"`
-	ExternalDocs OpenAPI310ExternalDocumentation `json:"externalDocs"`
+	Name         string                           `json:"name"`
+	Description  *string                          `json:"description"`
+	ExternalDocs *OpenAPI310ExternalDocumentation `json:"externalDocs"`
 }
 
 type OpenAPI310ExternalDocumentation struct {
-	Description string `json:"description"`
-	URL         string `json:"url"`
+	Description *string `json:"description"`
+	URL         string  `json:"url"`
 }
 
 func (resp OpenAPI310ApiResponse) IsSwaggerResponse() bool {

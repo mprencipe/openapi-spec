@@ -3,6 +3,7 @@ package parser
 import (
 	json "encoding/json"
 	"errors"
+	"fmt"
 
 	"github.com/mprencipe/openapi-spec/openapi"
 	"github.com/mprencipe/openapi-spec/swagger"
@@ -35,10 +36,9 @@ func openApiResponseOrError(bytes []byte, resp map[string]interface{}) (ApiRespo
 	openApiResponse := openapi.OpenAPI310ApiResponse{}
 	err := json.Unmarshal(bytes, &openApiResponse)
 	if err != nil {
-		return nil, errors.New("Failed to parse OpenAPI response")
+		return nil, fmt.Errorf("Failed to parse OpenAPI response: %w", err)
 	}
 	return openApiResponse, nil
-
 }
 
 func ParseApiResponse(bytes []byte) (ApiResponse, error) {

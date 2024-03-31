@@ -85,7 +85,7 @@ type OpenAPI310Parameter struct {
 	Explode         *bool                           `json:"explode"`
 	AllowReserved   *bool                           `json:"allowReserved"`
 	Schema          *OpenAPI310Schema               `json:"schema"`
-	Example         *OpenAPI310Example              `json:"example"`
+	Example         *interface{}                    `json:"example"`
 	Examples        *map[string]OpenAPI310Example   `json:"examples"`
 	Content         *map[string]OpenAPI310MediaType `json:"content"`
 }
@@ -141,7 +141,7 @@ type OpenAPI310Header struct {
 	Explode         *bool                         `json:"explode"`
 	AllowReserved   *bool                         `json:"allowReserved"`
 	Schema          *OpenAPI310Schema             `json:"schema"`
-	Example         *OpenAPI310Example            `json:"example"`
+	Example         *interface{}                  `json:"example"`
 	Examples        *map[string]OpenAPI310Example `json:"examples"`
 }
 

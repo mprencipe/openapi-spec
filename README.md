@@ -7,9 +7,5 @@ No external dependencies are used. As of now, the specification has not yet been
 A generic OpenAPI 3 definition is available for both OpenAPI versions since 3.1.0 is a superset of 3.0.x.
 
 ## TODO
-- Reference object
-- Ddiscriminator object
-- XML object
-- Security scheme object
+- Discriminator object
 - OAuth flows object
-- Security requirements object

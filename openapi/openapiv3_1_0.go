@@ -72,6 +72,7 @@ type OpenAPI310Response struct {
 	Content     *map[string]OpenAPI310MediaType `json:"content"`
 	Links       *map[string]OpenAPI310Link      `json:"links"`
 	Ref         *string                         `json:"$ref"`
+	Summary     *string                         `json:"summary"`
 }
 
 type OpenAPI310Parameter struct {
@@ -91,11 +92,30 @@ type OpenAPI310Parameter struct {
 }
 
 type OpenAPI310Schema struct {
-	Type string `json:"type"`
+	Type          string                           `json:"type"`
+	Discriminator *OpenAPI310Discriminator         `json:"discriminator"`
+	Xml           *OpenAPI310Xml                   `json:"xml"`
+	ExternalDocs  *OpenAPI310ExternalDocumentation `json:"externalDocs"`
+	Example       *interface{}                     `json:"example"`
+}
+
+type OpenAPI310Discriminator struct {
+	PropertyName string             `json:"propertyName"`
+	Mapping      *map[string]string `json:"mapping"`
+}
+
+type OpenAPI310Xml struct {
+	Name      *string `json:"name"`
+	Namespace *string `json:"namespace"`
+	Prefix    *string `json:"prefix"`
+	Attribute *bool   `json:"attribute"`
+	Wrapped   *bool   `json:"wrapped"`
 }
 
 type OpenAPI310ResponseRef struct {
-	Ref string `json:"$ref"`
+	Ref         string  `json:"$ref"`
+	Description *string `json:"description"`
+	Summary     *string `json:"summary"`
 }
 
 type OpenAPI310Components struct {

@@ -15,30 +15,30 @@ type ApiResponse interface {
 	IsOpenApiResponse() bool
 }
 
-func isSwaggerResponse(resp map[string]interface{}) bool {
-	return resp["swagger"] != nil
+func isSwaggerResponse(resp *map[string]interface{}) bool {
+	return (*resp)["swagger"] != nil
 }
 
-func isOpenApiResponse(resp map[string]interface{}) bool {
-	return resp["openapi"] != nil
+func isOpenApiResponse(resp *map[string]interface{}) bool {
+	return (*resp)["openapi"] != nil
 }
 
-func swaggerResponseOrError(jsonBytes []byte, resp map[string]interface{}) (ApiResponse, error) {
+func swaggerResponseOrError(jsonBytes []byte, resp *map[string]interface{}) (ApiResponse, error) {
 	swaggerResponse := swagger.SwaggerV2Response{}
 	err := json.Unmarshal(jsonBytes, &swaggerResponse)
 	if err != nil {
 		return nil, errors.New("Failed to parse Swagger response")
 	}
-	return swaggerResponse, nil
+	return &swaggerResponse, nil
 }
 
-func openApiResponseOrError(bytes []byte, resp map[string]interface{}) (ApiResponse, error) {
+func openApiResponseOrError(bytes []byte, resp *map[string]interface{}) (ApiResponse, error) {
 	openApiResponse := openapi.OpenAPI310ApiResponse{}
 	err := json.Unmarshal(bytes, &openApiResponse)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to parse OpenAPI response: %w", err)
 	}
-	return openApiResponse, nil
+	return &openApiResponse, nil
 }
 
 func ParseApiResponse(bytes []byte) (ApiResponse, error) {
@@ -47,10 +47,10 @@ func ParseApiResponse(bytes []byte) (ApiResponse, error) {
 	if err != nil {
 		return nil, errors.New("Failed to parse API response")
 	}
-	if isSwaggerResponse(resp) {
-		return swaggerResponseOrError(bytes, resp)
-	} else if isOpenApiResponse(resp) {
-		return openApiResponseOrError(bytes, resp)
+	if isSwaggerResponse(&resp) {
+		return swaggerResponseOrError(bytes, &resp)
+	} else if isOpenApiResponse(&resp) {
+		return openApiResponseOrError(bytes, &resp)
 	}
 	return nil, errors.New("Unsupported API type, not Swagger or OpenAPI")
 }
